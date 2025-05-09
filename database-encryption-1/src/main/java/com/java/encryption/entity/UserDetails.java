@@ -21,50 +21,60 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class UserDetails implements Serializable {
 	private static final long serialVersionUID = 8987703994554237818L;
+	private static final String CONVERT_AES_DECRYPT = "CONVERT(AES_DECRYPT(";
+	private static final String USING_UTF8 = " USING utf8)";
+	private static final String KEY = "'password')";
+	private static final String EMAIL_VALUE = 				CONVERT_AES_DECRYPT + "email_id, " 				+ KEY + USING_UTF8;
+  private static final String MOBILE_NUMBER_VALUE = CONVERT_AES_DECRYPT + "mobile_number, " 	+ KEY + USING_UTF8;
+	private static final String FIRST_NAME = 					CONVERT_AES_DECRYPT + "first_name, " 			+ KEY + USING_UTF8;
+  private static final String LAST_NAME = 					CONVERT_AES_DECRYPT + "last_name, " 			+ KEY + USING_UTF8;
+	private static final String ADDRESS = 						CONVERT_AES_DECRYPT + "address, " 				+ KEY + USING_UTF8;
+	private static final String COLUMN_DEFINITION = "BLOB";
+  private static final String DECRYPTION_VALUE = "AES_ENCRYPT(?, " + KEY;
 
-  @Id
+	@Id
   @GeneratedValue
   @UuidGenerator
   private String id;
 
   @ColumnTransformer(
       forColumn = "email_id",
-      read = "CONVERT(AES_DECRYPT(email_id, 'password') USING utf8)",
-      write = "AES_ENCRYPT(?, 'password')"
+      read = EMAIL_VALUE,
+      write = DECRYPTION_VALUE
   )
-  @Column(name = "email_id", columnDefinition = "BLOB")
+  @Column(name = "email_id", columnDefinition = COLUMN_DEFINITION)
   private String emailId;
 
   @ColumnTransformer(
       forColumn = "mobile_number",
-      read = "CONVERT(AES_DECRYPT(mobile_number, 'password') USING utf8)",
-      write = "AES_ENCRYPT(?, 'password')"
+      read = MOBILE_NUMBER_VALUE,
+      write = DECRYPTION_VALUE
   )
-  @Column(name = "mobile_number", columnDefinition = "BLOB")
+  @Column(name = "mobile_number", columnDefinition = COLUMN_DEFINITION)
   private String mobileNumber;
 
   @ColumnTransformer(
       forColumn = "first_name",
-      read = "CONVERT(AES_DECRYPT(first_name, 'password') USING utf8)",
-      write = "AES_ENCRYPT(?, 'password')"
+      read = FIRST_NAME,
+      write = DECRYPTION_VALUE
   )
-  @Column(name = "first_name", columnDefinition = "BLOB")
+  @Column(name = "first_name", columnDefinition = COLUMN_DEFINITION)
   private String firstName;
 
   @ColumnTransformer(
       forColumn = "last_name",
-      read = "CONVERT(AES_DECRYPT(last_name, 'password') USING utf8)",
-      write = "AES_ENCRYPT(?, 'password')"
+      read = LAST_NAME,
+      write = DECRYPTION_VALUE
   )
-  @Column(name = "last_name", columnDefinition = "BLOB")
+  @Column(name = "last_name", columnDefinition = COLUMN_DEFINITION)
   private String lastName;
 
   @ColumnTransformer(
       forColumn = "address",
-      read = "CONVERT(AES_DECRYPT(address, 'password') USING utf8)",
-      write = "AES_ENCRYPT(?, 'password')"
+      read = ADDRESS,
+      write = DECRYPTION_VALUE
   )
-  @Column(name = "address", columnDefinition = "BLOB")
+  @Column(name = "address", columnDefinition = COLUMN_DEFINITION)
   private String address;
 
   @Column(name = "city")
