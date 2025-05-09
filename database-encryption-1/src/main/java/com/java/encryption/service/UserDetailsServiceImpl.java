@@ -14,7 +14,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Override
 	public void saveUserDetails(UserDetailsModel userDetailsModel) {
-		
+
 		UserDetails userDetails =
 				UserDetails
 				.builder()
@@ -25,9 +25,9 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 				.address(userDetailsModel.getAddress())
 				.city(userDetailsModel.getCity())
 				.build();
-		
+
 		userDetailsRepository.save(userDetails);
-		
+
 	}
 
 	@Override
