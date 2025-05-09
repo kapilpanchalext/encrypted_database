@@ -29,40 +29,40 @@ public class UserDetails implements Serializable {
 
   @ColumnTransformer(
       forColumn = "email_id",
-      read = "CONVERT(AES_DECRYPT(email_id, 'email_idpassword') USING utf8)",
-      write = "AES_ENCRYPT(?, 'email_idpassword')"
+      read = "CONVERT(AES_DECRYPT(email_id, 'password') USING utf8)",
+      write = "AES_ENCRYPT(?, 'password')"
   )
   @Column(name = "email_id", columnDefinition = "BLOB")
   private String emailId;
 
   @ColumnTransformer(
       forColumn = "mobile_number",
-      read = "CONVERT(AES_DECRYPT(mobile_number, 'mobile_numberpassword') USING utf8)",
-      write = "AES_ENCRYPT(?, 'mobile_numberpassword')"
+      read = "CONVERT(AES_DECRYPT(mobile_number, 'password') USING utf8)",
+      write = "AES_ENCRYPT(?, 'password')"
   )
   @Column(name = "mobile_number", columnDefinition = "BLOB")
   private String mobileNumber;
 
   @ColumnTransformer(
       forColumn = "first_name",
-      read = "CONVERT(AES_DECRYPT(first_name, 'first_namepassword') USING utf8)",
-      write = "AES_ENCRYPT(?, 'first_namepassword')"
+      read = "CONVERT(AES_DECRYPT(first_name, 'password') USING utf8)",
+      write = "AES_ENCRYPT(?, 'password')"
   )
   @Column(name = "first_name", columnDefinition = "BLOB")
   private String firstName;
 
   @ColumnTransformer(
       forColumn = "last_name",
-      read = "CONVERT(AES_DECRYPT(last_name, 'last_namepassword') USING utf8)",
-      write = "AES_ENCRYPT(?, 'last_namepassword')"
+      read = "CONVERT(AES_DECRYPT(last_name, 'password') USING utf8)",
+      write = "AES_ENCRYPT(?, 'password')"
   )
   @Column(name = "last_name", columnDefinition = "BLOB")
   private String lastName;
 
   @ColumnTransformer(
       forColumn = "address",
-      read = "CONVERT(AES_DECRYPT(address, 'addresspassword') USING utf8)",
-      write = "AES_ENCRYPT(?, 'addresspassword')"
+      read = "CONVERT(AES_DECRYPT(address, 'password') USING utf8)",
+      write = "AES_ENCRYPT(?, 'password')"
   )
   @Column(name = "address", columnDefinition = "BLOB")
   private String address;
